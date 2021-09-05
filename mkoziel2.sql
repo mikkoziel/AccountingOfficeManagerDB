@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Czas generowania: 05 Wrz 2021, 15:39
+-- Czas generowania: 05 Wrz 2021, 15:40
 -- Wersja serwera: 10.1.48-MariaDB-0+deb9u2
 -- Wersja PHP: 7.0.33-0+deb9u10
 
@@ -30,6 +30,14 @@ CREATE TABLE `accounting_office` (
   `company_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `accounting_office`
+--
+
+INSERT INTO `accounting_office` (`company_id`) VALUES
+(1),
+(14);
+
 -- --------------------------------------------------------
 
 --
@@ -44,6 +52,13 @@ CREATE TABLE `calendar` (
   `all_day` bit(1) NOT NULL DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `calendar`
+--
+
+INSERT INTO `calendar` (`calendar_id`, `start_date`, `end_date`, `title`, `all_day`) VALUES
+(28, '2021-09-05 12:15:00', '2021-09-05 13:15:00', 'aaa', b'0');
+
 -- --------------------------------------------------------
 
 --
@@ -54,6 +69,13 @@ CREATE TABLE `calendar_user` (
   `calendar_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `calendar_user`
+--
+
+INSERT INTO `calendar_user` (`calendar_id`, `user_id`) VALUES
+(28, 20);
 
 -- --------------------------------------------------------
 
@@ -66,6 +88,15 @@ CREATE TABLE `client` (
   `employee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `client`
+--
+
+INSERT INTO `client` (`user_id`, `employee_id`) VALUES
+(7, 16),
+(17, 3),
+(23, 20);
+
 -- --------------------------------------------------------
 
 --
@@ -77,6 +108,15 @@ CREATE TABLE `client_company` (
   `ao_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `client_company`
+--
+
+INSERT INTO `client_company` (`company_id`, `ao_id`) VALUES
+(3, 1),
+(4, 1),
+(15, 14);
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +127,17 @@ CREATE TABLE `company` (
   `company_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `company`
+--
+
+INSERT INTO `company` (`company_id`, `name`) VALUES
+(1, 'AOL'),
+(3, 'Google'),
+(4, 'Facebook'),
+(14, 'BEN'),
+(15, 'MultiCulti');
 
 -- --------------------------------------------------------
 
@@ -113,6 +164,19 @@ CREATE TABLE `employee` (
   `user_id` int(11) NOT NULL,
   `admin_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `employee`
+--
+
+INSERT INTO `employee` (`user_id`, `admin_id`) VALUES
+(3, 16),
+(4, 3),
+(5, 3),
+(6, 3),
+(16, NULL),
+(20, NULL),
+(24, 20);
 
 -- --------------------------------------------------------
 
@@ -150,6 +214,22 @@ CREATE TABLE `user` (
   `password` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Zrzut danych tabeli `user`
+--
+
+INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `username`, `company_id`, `password`) VALUES
+(3, 'Lucjan', 'Wor', 'lucjan.wor@aol.com', 1, ''),
+(4, 'Piotr', 'Krawiec', 'piotr.krawiec@aol.com', 1, ''),
+(5, 'Jacek', 'Bor', 'jacek.bor@aol.com', 1, ''),
+(6, 'Marek', 'Klin', 'marek.klin@aol.com', 1, ''),
+(7, 'Grzegorz', 'Wrzeszcz', 'grzegorz.wrzeszcz@google.com', 3, ''),
+(16, 'Marek', 'Klin', 'marek.klin4@aol.com', 1, '$2a$10$hdaHtawL4DfZFgh/R9Gb.eeKjYx4zpM8vQ78dnQs5.EjzoUsY52Di'),
+(17, 'Anna', 'Jakubiak', 'anna.jakubiak@facebook.com', 4, ''),
+(20, 'Anna', 'Bator', 'anna.bator@ben.com', 14, '$2a$10$Wo/YnxVM4j1iDz82L3p9pOn8fZJlONUrc3GbQlZch6WNcUO7d7a8i'),
+(23, 'Marta', 'Ach', 'marta.ach@multi.com', 15, '$2a$10$9yBR0GXfUv9Ar7zFaS6e4.Ildx3aL/P/HPJoALSXh.Oii1G0sAeKK'),
+(24, 'Piotr', 'Omg', 'piotr.omg@ben.com', 14, '$2a$10$4L59AN8EwAjiBU.Q1hE3Q.5EibyHaERYP3wIq3f3ZKEALpo9zLKVi');
+
 -- --------------------------------------------------------
 
 --
@@ -160,6 +240,19 @@ CREATE TABLE `user_role` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `user_role`
+--
+
+INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
+(16, 1),
+(3, 1),
+(7, 3),
+(17, 3),
+(20, 4),
+(23, 3),
+(24, 2);
 
 -- --------------------------------------------------------
 
@@ -173,6 +266,15 @@ CREATE TABLE `work_log` (
   `date` datetime NOT NULL,
   `duration` bigint(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `work_log`
+--
+
+INSERT INTO `work_log` (`worklog_id`, `user_id`, `date`, `duration`) VALUES
+(1, 16, '2021-07-16 08:00:00', 28800),
+(2, 16, '2021-07-15 08:00:00', 19800),
+(3, 16, '2021-07-17 23:13:28', 3603);
 
 --
 -- Indeksy dla zrzutów tabel
